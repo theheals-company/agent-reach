@@ -1,20 +1,13 @@
 [project]
 name = "agent-reach"
-version = "1.5.0"
-description = "Give your AI Agent eyes to see the entire internet. Search + Read 10+ platforms."
+version = "1.5.0+heals.1"
+description = "theheals pinned fork of Agent-Reach (upstream a19a171) — Tier A read-only availability checker (web, youtube, rss, github)."
 readme = "README.md"
 license = {text = "MIT"}
 requires-python = ">=3.10"
 authors = [{name = "Neo Reid"}]
-keywords = [
-    "ai-agent", "llm-tools", "agent-infrastructure", "mcp",
-    "web-reader", "web-scraper", "search",
-    "twitter-scraper", "reddit-scraper", "youtube-transcript",
-    "bilibili", "xiaohongshu",
-    "ai-search", "cli", "automation",
-    "claude-code", "cursor", "openai",
-    "free-api", "no-api-key",
-]
+maintainers = [{name = "theheals-company"}]
+keywords = ["ai-agent", "cli", "youtube-transcript", "rss", "github", "web-reader"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
@@ -24,28 +17,22 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Topic :: Internet :: WWW/HTTP",
-    "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]
 
+# Supply-chain minimum (V2.7-04 CC-08 R-1/R-2): requests, python-dotenv, loguru and the
+# optional extras browser/cookies/all were removed with the code that used them.
 dependencies = [
-    "requests>=2.28",
     "feedparser>=6.0",
-    "python-dotenv>=1.0",
-    "loguru>=0.7",
     "pyyaml>=6.0",
     "rich>=13.0",
     "yt-dlp[default]>=2026.07.04",
 ]
 
 [project.optional-dependencies]
-browser = ["playwright>=1.40"]
-cookies = ["browser-cookie3>=0.19"]
-all = ["playwright>=1.40", "mcp[cli]>=1.0", "browser-cookie3>=0.19"]
 dev = [
     "pytest>=8.0",
     "ruff>=0.8",
     "mypy>=1.12",
-    "types-requests>=2.32",
     "types-PyYAML>=6.0",
 ]
 
@@ -53,9 +40,9 @@ dev = [
 agent-reach = "agent_reach.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/Panniantong/agent-reach"
-Repository = "https://github.com/Panniantong/agent-reach"
-Issues = "https://github.com/Panniantong/agent-reach/issues"
+Homepage = "https://github.com/theheals-company/agent-reach"
+Repository = "https://github.com/theheals-company/agent-reach"
+Upstream = "https://github.com/Panniantong/agent-reach"
 
 [build-system]
 requires = ["hatchling"]

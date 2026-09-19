@@ -105,7 +105,7 @@ def test_check_warn_when_no_js_runtime_but_backend_active():
         status, message = ch.check()
     assert status == "warn"
     assert "JS runtime" in message
-    assert "agent-reach install --system" in message
+    assert "install --system" not in message  # theheals fork: installer removed
     assert ch.active_backend == "yt-dlp"  # probe was ok → backend attributed
 
 
