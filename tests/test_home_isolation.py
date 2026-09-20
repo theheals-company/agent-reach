@@ -22,13 +22,7 @@ def test_doctor_leaves_sandbox_home_unchanged(
     """If Doctor is truly read-only, even the sandbox remains empty."""
     monkeypatch.setattr("agent_reach.doctor.check_all", lambda config: {})
     monkeypatch.setattr("agent_reach.doctor.format_report", lambda results: "report")
-    monkeypatch.setattr(
-        cli,
-        "_install_skill",
-        lambda *args, **kwargs: (_ for _ in ()).throw(
-            AssertionError("doctor must not install skills")
-        ),
-    )
+    # theheals fork: cli has no _install_skill any more (installer removed).
 
     cli._cmd_doctor(Namespace(json=False))
 

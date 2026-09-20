@@ -1,51 +1,37 @@
 # -*- coding: utf-8 -*-
 """
-Channel registry — lists all supported platforms for doctor checks.
+Channel registry — theheals pinned fork.
+
+Only Tier A channels are registered (V2.7-04 CC-08 R-1, decision D96):
+web · youtube · rss · github.
+
+Tier B channel modules (twitter.py, reddit.py) are kept in the tree for the
+future R-6 approval but are deliberately NOT registered here, so `doctor`
+never probes them and the vault wrapper's allowlist cannot reach them.
+Every other upstream channel file was deleted (code path removed).
 """
 
 from typing import List, Optional
 
-# Import all channels
 from .base import Channel
-from .bilibili import BilibiliChannel
-from .boss import BossChannel
-from .exa_search import ExaSearchChannel
-from .facebook import FacebookChannel
 from .github import GitHubChannel
-from .instagram import InstagramChannel
-from .linkedin import LinkedInChannel
-from .reddit import RedditChannel
 from .rss import RSSChannel
-from .twitter import TwitterChannel
-from .v2ex import V2EXChannel
 from .web import WebChannel
-from .xiaohongshu import XiaoHongShuChannel
-from .xiaoyuzhou import XiaoyuzhouChannel
-from .xueqiu import XueqiuChannel
 from .youtube import YouTubeChannel
 
 ALL_CHANNELS: List[Channel] = [
     GitHubChannel(),
-    TwitterChannel(),
     YouTubeChannel(),
-    RedditChannel(),
-    FacebookChannel(),
-    InstagramChannel(),
-    BilibiliChannel(),
-    XiaoHongShuChannel(),
-    LinkedInChannel(),
-    BossChannel(),
-    XiaoyuzhouChannel(),
-    V2EXChannel(),
-    XueqiuChannel(),
     RSSChannel(),
-    ExaSearchChannel(),
     WebChannel(),
 ]
 
+#: Tier B modules present on disk but outside the allowlist (not registered).
+TIER_B_UNREGISTERED = ("twitter", "reddit")
+
 
 def get_channel(name: str) -> Optional[Channel]:
-    """Get a channel by name."""
+    """Get a registered (Tier A) channel by name."""
     for ch in ALL_CHANNELS:
         if ch.name == name:
             return ch
@@ -53,13 +39,14 @@ def get_channel(name: str) -> Optional[Channel]:
 
 
 def get_all_channels() -> List[Channel]:
-    """Get all registered channels."""
+    """Get all registered (Tier A) channels."""
     return ALL_CHANNELS
 
 
 __all__ = [
     "Channel",
     "ALL_CHANNELS",
+    "TIER_B_UNREGISTERED",
     "get_channel",
     "get_all_channels",
 ]
